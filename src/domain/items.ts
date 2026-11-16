@@ -1,6 +1,5 @@
 // Oprema za prototip (8 predmeta, specifikacija Etape 0, poglavlje 6).
-// Prava AI grafika (test H2) dodaje se kasnije kao PNG slojevi iste veličine;
-// do tada se lik crta privremenim oblicima (vidi src/components/Avatar.tsx).
+// Grafika predmeta je u src/art/character.ts (SVG slojevi na istoj mreži kao lik).
 
 export type Slot = 'head' | 'torso' | 'legs' | 'feet' | 'hand' | 'aura';
 export type Rarity = 'common' | 'rare' | 'epic' | 'legendary';

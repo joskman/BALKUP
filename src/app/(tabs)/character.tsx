@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, View } from 'react-native';
 
-import { Avatar, equippedMap } from '@/components/Avatar';
+import { Avatar, equippedMap, ItemPreview } from '@/components/Avatar';
 import { Card, Loading, Row, Screen, T } from '@/components/ui';
 import { computeProgress } from '@/db/progress';
 import { setEquipped } from '@/db/repo';
@@ -34,7 +34,7 @@ export default function CharacterScreen() {
       <Card style={{ alignItems: 'center' }}>
         <Avatar size={240} equipped={equipped} />
         <T variant="heading">Level {data.level.level}</T>
-        <T variant="small">Privremeni lik. Prava grafika dolazi nakon testa AI opreme (H2).</T>
+        <T variant="small">Opremi otključane predmete u inventaru ispod.</T>
       </Card>
 
       <Card>
@@ -65,7 +65,13 @@ export default function CharacterScreen() {
                 { borderColor: unlocked ? rarityColors[item.rarity] : colors.border },
                 row?.equipped && { backgroundColor: colors.cardHigh },
               ]}>
-              <View style={[styles.swatch, { backgroundColor: unlocked ? rarityColors[item.rarity] : colors.cardHigh }]} />
+              <View style={styles.preview}>
+                {unlocked ? (
+                  <ItemPreview item={item} size={84} />
+                ) : (
+                  <T style={{ fontSize: 28, color: colors.textFaint }}>🔒</T>
+                )}
+              </View>
               <T style={{ fontWeight: '700', color: unlocked ? colors.text : colors.textFaint }} numberOfLines={2}>
                 {unlocked ? item.name : '???'}
               </T>
@@ -94,5 +100,12 @@ const styles = StyleSheet.create({
     padding: space.md,
     gap: 4,
   },
-  swatch: { height: 36, borderRadius: radius.sm, marginBottom: 4 },
+  preview: {
+    height: 92,
+    borderRadius: radius.sm,
+    backgroundColor: colors.bg,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 4,
+  },
 });
